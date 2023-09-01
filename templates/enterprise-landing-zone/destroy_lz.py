@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import Dict, List
 
 import oci
+import logging
 from tqdm import tqdm
 
 
@@ -21,6 +22,9 @@ class DestroyLandingZone:
                 file_location=oci_config_file,
                 profile_name=profile_name
             )
+
+        # JMA
+        self.config["log_requests"] = True
 
         self.identity_client = oci.identity.IdentityClient(self.config)
         self.os_client = oci.object_storage.ObjectStorageClient(self.config)
@@ -311,7 +315,7 @@ class DestroyLandingZone:
 
         # log analytics errors out in certain tenancies - fix unknown
         print("beginning log analytics destroy")
-        self.purge_log_analytics(compartments["security"])
+        # self.purge_log_analytics(compartments["security"])
         self.delete_log_analytics_group(compartments["security"])
 
         print("deactivating domains")
@@ -376,6 +380,10 @@ if __name__ == "__main__":
     will be deleted, identity domains deactivated, and vaults moved to the root
     compartment. Terraform destroy will need to be run after.
     '''
+
+    # JMA
+    logging.getLogger('oci').setLevel(logging.DEBUG)
+    oci.base_client.is_http_log_enabled(True)
 
     parser = argparse.ArgumentParser(
         description="Destroy Landing Zone Lingering Resources")
