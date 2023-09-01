@@ -1,7 +1,9 @@
 #tfvars file for the ci pipline
+
 # iam
 resource_label             = "INTEGRATION"
 enable_compartment_delete  = false
+is_baseline_deploy         = true
 
 # security
 enable_cloud_guard                           = true
@@ -32,7 +34,7 @@ nonprod_enable_vpn        = false
 
 # Network
 
-prod_enable_internet_gateway_hub                 = "true"    
+prod_enable_internet_gateway_hub                 = "true"
 prod_enable_nat_gateway_hub                      = "true"
 prod_enable_service_gateway_hub                  = "true"
 prod_enable_nat_gateway_spoke                    = "true"
@@ -72,6 +74,10 @@ nonprod_enable_tagging       = true
 
 # logging
 onboard_log_analytics = false
+
+#Workload
+
+workload_name_prefix = "Workload1"
 
 # Workload Expansion
 # prod_additional_workload_subnets_cidr_blocks = []

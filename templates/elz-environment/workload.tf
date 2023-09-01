@@ -3,23 +3,23 @@
 # -----------------------------------------------------------------------------
 locals {
   workload = {
-    workload_name             = "Workload1"
-    enable_compartment_delete = true
+    workload_name             = var.workload_name_prefix
+    enable_compartment_delete = var.enable_compartment_delete
   }
 }
 
 module "workload" {
   source = "../elz-workload"
 
-  tenancy_ocid       = var.tenancy_ocid
-  region             = var.region
-  environment_prefix = var.environment_prefix
+  tenancy_ocid                 = var.tenancy_ocid
+  region                       = var.region
+  environment_prefix           = var.environment_prefix
 
-  workload_name              = local.workload.workload_name
-  enable_compartment_delete  = local.workload.enable_compartment_delete
-  environment_compartment_id = module.compartment.compartments.environment.id
-  security_compartment_id    = module.compartment.compartments.security.id
-  network_compartment_id     = module.compartment.compartments.network.id
+  workload_name                = local.workload.workload_name
+  enable_compartment_delete    = local.workload.enable_compartment_delete
+  environment_compartment_id   = module.compartment.compartments.environment.id
+  security_compartment_id      = module.compartment.compartments.security.id
+  network_compartment_id       = module.compartment.compartments.network.id
 
   security_compartment_name    = module.compartment.compartments.security.name
   identity_domain_id           = module.identity.domain.id
@@ -42,6 +42,7 @@ module "workload" {
   workload_private_spoke_subnet_db_cidr_block  = var.private_spoke_subnet_db_cidr_block
   workload_private_spoke_subnet_web_cidr_block = var.private_spoke_subnet_web_cidr_block
   workload_spoke_vcn_cidr                      = var.spoke_vcn_cidr
+  
 
   providers = {
     oci             = oci

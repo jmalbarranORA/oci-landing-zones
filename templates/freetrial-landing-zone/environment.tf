@@ -18,6 +18,7 @@ module "prod_environment" {
   api_fingerprint    = var.api_fingerprint
   api_private_key_path = var.api_private_key_path  
   resource_label = var.resource_label
+  is_baseline_deploy = var.is_freetrial_deploy
 
   home_compartment_id                 = module.home_compartment.compartment_id
   environment_prefix                  = local.prod_environment.environment_prefix

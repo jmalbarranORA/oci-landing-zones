@@ -13,6 +13,11 @@ variable "region" {
   description = "The OCI region"
 }
 
+variable "home_compartment_id" {
+  type        = string
+  description = "Home Compartment ID"
+}
+
 variable "workload_spoke_vcn_cidr" {
   description = "The list of IPv4 CIDR blocks the VCN will use."
   type        = string
@@ -112,6 +117,10 @@ variable "route_table_display_name" {
 variable "security_list_display_name" {
   type        = string
   description = "Workload Expansion Spoke Security List Name Disly Name."
+}
+variable "is_baseline_deploy" {
+  type        = bool
+  description = "TagNameSpace Optimization: Enable this flag to disable dependent module TagNameSpace Tag Creation."
 }
 variable "enable_vpn_or_fastconnect" {}
 variable "enable_vpn_on_environment" {}

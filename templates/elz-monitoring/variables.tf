@@ -20,7 +20,14 @@ variable "resource_label" {
   type        = string
   description = "Prefix used to avoid naming conflict"
 }
-
+variable "home_compartment_id" {
+  type        = string
+  description = "Home Compartment ID"
+}
+variable "is_baseline_deploy" {
+  type        = bool
+  description = "TagNameSpace Optimization: Enable this flag to disable dependent module TagNameSpace Tag Creation."
+}
 # -----------------------------------------------------------------------------
 # Common Variables
 # -----------------------------------------------------------------------------

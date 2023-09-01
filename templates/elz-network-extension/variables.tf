@@ -14,6 +14,11 @@ variable "environment_prefix" {
   description = ""
 }
 
+variable "home_compartment_id" {
+  type        = string
+  description = "Home Compartment ID"
+}
+
 variable "enable_vpn_or_fastconnect" {
   type        = string
   description = "Option to enable VPN or FASTCONNECT service. Options are NONE, VPN, FASTCONNECT."
@@ -159,4 +164,8 @@ variable "drg_route_table_rpc_id" {
 
 variable "drg_route_table_vc_id" {
   type    = string
+}
+variable "is_baseline_deploy" {
+  type        = bool
+  description = "TagNameSpace Optimization: Enable this flag to disable dependent module TagNameSpace Tag Creation."
 }

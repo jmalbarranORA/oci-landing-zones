@@ -2,7 +2,7 @@
 locals {
   architecture_tag = {
     tag_namespace_description = "ArchitectureCenterTagNamespace"
-    tag_namespace_name        = "ArchitectureCenter\\oci-enterprise-scale-baseline-landing-zone-v2-${random_id.tag.hex}"
+    tag_namespace_name        = "ArchitectureCenter\\oracle-enterprise-landing-zone-baseline-v2-${random_id.tag.hex}"
     is_namespace_retired      = false
     tag_map = {
       architecture_tag = {
@@ -30,6 +30,7 @@ resource "random_id" "tag" {
 }
 
 module "architecture_tag" {
+  count                     = var.is_baseline_deploy ? 1 : 0
   source                    = "../../modules/tag"
   compartment_id            = var.tenancy_ocid
   tag_namespace_description = local.architecture_tag.tag_namespace_description

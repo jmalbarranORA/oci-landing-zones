@@ -31,6 +31,8 @@ module "prod_environment" {
   ops_admin_group_name              = var.prod_ops_admin_group_name
   security_admin_group_name         = var.prod_security_admin_group_name
   workload_compartment_names        = var.prod_workload_compartment_names
+  is_baseline_deploy                = var.is_baseline_deploy
+  enable_compartment_delete         = var.enable_compartment_delete
 
   workload_admin_group_name         = var.prod_workload_admin_group_name
   application_admin_group_name      = var.prod_application_admin_group_name
@@ -124,6 +126,7 @@ module "prod_environment" {
   enable_network_monitoring_alarms    = var.prod_enable_network_monitoring_alarms
   enable_workload_monitoring_alarms   = var.prod_enable_workload_monitoring_alarms
 
+  workload_name_prefix                = var.workload_name_prefix
   additional_workload_subnets_cidr_blocks = var.prod_additional_workload_subnets_cidr_blocks
 
   providers = {
@@ -171,7 +174,9 @@ module "nonprod_environment" {
   ops_admin_group_name              = var.nonprod_ops_admin_group_name
   security_admin_group_name         = var.nonprod_security_admin_group_name
   workload_compartment_names        = var.nonprod_workload_compartment_names
-
+  is_baseline_deploy                = var.is_baseline_deploy
+  enable_compartment_delete         = var.enable_compartment_delete
+  
   workload_admin_group_name         = var.nonprod_workload_admin_group_name
   application_admin_group_name      = var.nonprod_application_admin_group_name
   database_admin_group_name         = var.nonprod_database_admin_group_name
@@ -269,6 +274,7 @@ module "nonprod_environment" {
   remote_peering_connection_peer_id          = var.enable_vpn_or_fastconnect == "FASTCONNECT" ? module.prod_environment.rpc_id : null
   remote_peering_connection_peer_region_name = var.region
 
+  workload_name_prefix                = var.workload_name_prefix
   additional_workload_subnets_cidr_blocks = var.nonprod_additional_workload_subnets_cidr_blocks
 
   providers = {

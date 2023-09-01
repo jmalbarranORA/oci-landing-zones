@@ -2,7 +2,7 @@
 locals {
   architecture_tag = {
     tag_namespace_description = "ArchitectureCenterTagNamespace"
-    tag_namespace_name        = "ArchitectureCenter\\oci-enterprise-scale-baseline-landing-zone-v2-${random_id.tag.hex}"
+    tag_namespace_name        = "ArchitectureCenter\\oracle-enterprise-landing-zone-freetrial-v2-${random_id.tag.hex}"
     is_namespace_retired      = false
     tag_map = {
       architecture_tag = {
@@ -16,7 +16,7 @@ locals {
     }
     tag_default_map = {
       architecture_tag = {
-        compartment_id      = module.home_compartment.compartment_id
+        compartment_id      = var.home_compartment_id
         tag_definition_name = "architecture_tag"
         value               = "2.0.0"
         is_required         = false
@@ -30,6 +30,7 @@ resource "random_id" "tag" {
 }
 
 module "architecture_tag" {
+  count                     = var.is_freetrial_deploy ? 1 : 0
   source                    = "../../modules/tag"
   compartment_id            = var.tenancy_ocid
   tag_namespace_description = local.architecture_tag.tag_namespace_description
